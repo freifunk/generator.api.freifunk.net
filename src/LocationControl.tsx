@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { withJsonFormsControlProps } from "@jsonforms/react";
 import { MapContainer, TileLayer } from 'react-leaflet';
-import { Location } from './Location';
+import Location  from './Location';
 
 import 'leaflet/dist/leaflet.css';
 
@@ -16,13 +16,8 @@ const center = {
 }
 
 const LocationControl = ({ data, handleChange, path }: LocationControlProps) => (
-	<MapContainer center={center} zoom={13} scrollWheelZoom={false} style={{ height: '100vh', width: '100wh' }}>
-	    <TileLayer
-	      attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-	      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-	    />
+	    
 	    <Location />
-  	</MapContainer>
 );
 
 export default withJsonFormsControlProps(LocationControl);
