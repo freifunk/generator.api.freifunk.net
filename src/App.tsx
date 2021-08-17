@@ -166,6 +166,8 @@ const App = () => {
       });
       return data;
     }
+
+    return data;
   }
 
   //to load the data into the form
@@ -198,7 +200,7 @@ const App = () => {
         spacing={1}
         className={classes.container}
       >
-        <Grid item sm={6}>
+        <Grid item sm={5}>
 
           <Typography variant={'h3'} className={classes.title}>
             Load Data
@@ -242,7 +244,7 @@ const App = () => {
 
         </Grid>
 
-        <Grid item sm={6}>
+        <Grid item sm={7}>
           <Typography variant={'h3'} className={classes.title}>
             Generator form
           </Typography>
