@@ -108,7 +108,7 @@ const App = () => {
     if (validationErrors.length === 0 && Object.keys(jsonformsData).length !== 0) {
       const fileName = "yourapi";
       let fileData = jsonformsData;
-      fileData.api = "5.0.0";
+      fileData.api = "0.5.0";
       const json = JSON.stringify(jsonformsData);
       const blob = new Blob([json],{type:'application/json'});
       const href = await URL.createObjectURL(blob);
