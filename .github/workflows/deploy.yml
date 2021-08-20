@@ -3,7 +3,7 @@ name: Build and Deploy to GHpages
 on:
   push:
     branches: [ master ]
-  pull_requests:
+  pull_request:
     branches: [ master ]
 
 jobs:
