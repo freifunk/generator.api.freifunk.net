@@ -2,6 +2,7 @@
   "name": "generator.api.freifunk.net",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://freifunk.github.io/generator.api.freifunk.net",
   "dependencies": {
     "@jsonforms/core": "^2.5.1",
     "@jsonforms/material-renderers": "^2.5.1",
@@ -38,7 +39,9 @@
     "test": "react-scripts test --env=jsdom",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run --config video=false",
-    "cypress:ci": "BROWSER=none start-server-and-test start http://localhost:3000 cypress:run"
+    "cypress:ci": "BROWSER=none start-server-and-test start http://localhost:3000 cypress:run",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [

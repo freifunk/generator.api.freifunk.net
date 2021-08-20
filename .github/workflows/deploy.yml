@@ -13,10 +13,10 @@ jobs:
       - name: Building
         run: |
           npm install
-          npm run build
+          npm run deploy
 
-      - name: Deploying
-        uses: JamesIves/github-pages-deploy-action@4.1.4
-        with:
-          branch: gh-pages
-          folder: build
+      # - name: Deploying
+      #   uses: JamesIves/github-pages-deploy-action@4.1.4
+      #   with:
+      #     branch: gh-pages
+      #     folder: build
