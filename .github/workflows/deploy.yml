@@ -1,20 +1,29 @@
 name: Build and Deploy to GHpages
+
 on:
   push:
-    branches:
-      - master
+    branches: [ master ]
+  pull_requests:
+    branches: [ master ]
+
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
+    
     steps:
+      
       - name: Checkout
         uses: actions/checkout@v2.3.1
 
-      - name: Building
-        run: |
-          npm install
-          npm run deploy
+      
+      - name: Deploy react app to github pages
+        uses: tanwanimohit/deploy-react-to-ghpages@v1.0.1
 
+      # - name: Building and Deploying
+        # run: |
+          # npm install
+          # npm run deploy
+# 
       # - name: Deploying
       #   uses: JamesIves/github-pages-deploy-action@4.1.4
       #   with:
