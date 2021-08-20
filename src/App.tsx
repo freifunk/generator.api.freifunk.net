@@ -20,7 +20,7 @@ import locationControlTester from './locationControlTester';
 import { makeStyles } from '@material-ui/core/styles';
 import { Text } from 'react-native';
 import * as React from 'react';
-import Select from 'react-select'     
+import Select from 'react-select'
 
 const useStyles = makeStyles((_theme) => ({
   container: {
@@ -170,6 +170,27 @@ const App = () => {
     return data;
   }
 
+  const correctCaseSensitivity = (data: any) => {
+
+    if(data.location.address.Name){
+      data.location.address.name = data.location.address.Name;
+      delete data.location.address.Name;
+    }
+
+    if(data.location.address.Street){
+      data.location.address.street = data.location.address.Street;
+      delete data.location.address.Street;
+    }
+
+
+    if(data.location.address.Zipcode){
+      data.location.address.zipcode = data.location.address.Zipcode;
+      delete data.location.address.Zipcode;
+    }
+
+    return data;
+  }
+
   //to load the data into the form
   let loadData = (community: any) => {
     // console.log(community.value)
@@ -177,6 +198,7 @@ const App = () => {
       .then(response => response.json())
       .then(data => {
         data = correctLocation(data.contents);
+        data = correctCaseSensitivity(data);
         setJsonformsData(data);
       })
       .catch(()=> console.log("NetworkError: Can't fetch the api file"))
