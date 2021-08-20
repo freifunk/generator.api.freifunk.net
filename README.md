@@ -12,3 +12,5 @@ Let's briefly have a look at the most important files:
 
 - `src/schema.json` contains the JSON schema (The JSON schema of the generator tool).
 - `src/uischema.json` contains the UI schema.
+
+The generator can be previewed at https://freifunk.github.io/generator.api.freifunk.net/
