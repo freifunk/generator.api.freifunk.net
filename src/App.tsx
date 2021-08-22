@@ -20,7 +20,8 @@ import locationControlTester from './locationControlTester';
 import { makeStyles } from '@material-ui/core/styles';
 import { Text } from 'react-native';
 import * as React from 'react';
-import Select from 'react-select'
+import Select from 'react-select';
+import slugify from 'react-slugify';
 
 const useStyles = makeStyles((_theme) => ({
   container: {
@@ -106,7 +107,7 @@ const App = () => {
   //to validate the data and generate the json file
   let generateFile = async () => {
     if (validationErrors.length === 0 && Object.keys(jsonformsData).length !== 0) {
-      const fileName = "yourapi";
+      const fileName = slugify(jsonformsData.name);
       let fileData = jsonformsData;
       fileData.api = "0.5.0";
       const json = JSON.stringify(jsonformsData);
