@@ -38,7 +38,17 @@ const useStyles = makeStyles((_theme) => ({
     borderRadius: '0.25em',
     backgroundColor: '#cecece',
     marginBottom: '1rem',
-    padding: "1rem"
+    padding: '1rem',
+    width: '100%',
+    minHeight: '20em',
+  },
+  dataValidation: {
+    display: 'flex',
+    justifyContent: 'center',
+    borderRadius: '0.25em',
+    backgroundColor: '#cecece',
+    marginBottom: '1rem',
+    padding: '1rem',
   },
   buttonLayout: {
     display: 'flex',
@@ -72,6 +82,7 @@ const renderers = [
   { tester: locationControlTester, renderer: LocationControl },
 ];
 
+const apiVersion = "0.5.0";
 //    Forms App
 const App = () => {
 
@@ -82,6 +93,7 @@ const App = () => {
   const [jsonformsData, setJsonformsData] = useState<any>(initialData);
 
   useEffect(() => {
+    jsonformsData.api = apiVersion;
     setDisplayDataAsString(JSON.stringify(jsonformsData, null, 2));
   }, [jsonformsData]);
 
@@ -109,7 +121,7 @@ const App = () => {
     if (validationErrors.length === 0 && Object.keys(jsonformsData).length !== 0) {
       const fileName = slugify(jsonformsData.name);
       let fileData = jsonformsData;
-      fileData.api = "0.5.0";
+      fileData.api = apiVersion;
       const json = JSON.stringify(jsonformsData);
       const blob = new Blob([json],{type:'application/json'});
       const href = await URL.createObjectURL(blob);
@@ -237,12 +249,12 @@ const App = () => {
           </div>
 
           <Typography variant={'h3'} className={classes.title}>
-            Bound data
+            Your API file
           </Typography>
 
-          <div id='boundData' className={classes.dataContent}>
-            <Text>{displayDataAsString}</Text>
-          </div>
+          <textarea disabled id='boundData' className={classes.dataContent}
+            value={displayDataAsString}
+          />
 
           <div className={classes.buttonLayout}>
             <Button
@@ -260,7 +272,7 @@ const App = () => {
               Validation
             </Typography>
 
-            <div className={classes.dataContent}>
+            <div className={classes.dataValidation}>
               <Text>{validationErrors.map(d => <li key= {d.dataPath}>{d.dataPath}:{d.message}</li>)}</Text>
             </div>
           </div>
