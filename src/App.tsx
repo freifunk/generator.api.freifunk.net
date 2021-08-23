@@ -185,6 +185,9 @@ const App = () => {
 
   const correctCaseSensitivity = (data: any) => {
 
+    if(!data.location.address)
+      return data
+
     if(data.location.address.Name){
       data.location.address.name = data.location.address.Name;
       delete data.location.address.Name;
@@ -214,7 +217,7 @@ const App = () => {
         data = correctCaseSensitivity(data);
         setJsonformsData(data);
       })
-      .catch(()=> console.log("NetworkError: Can't fetch the api file"))
+      // .catch(()=> console.log("NetworkError: Can't fetch the api file"))
       // .then(con => console.log(con))
     // setJsonformsData(comminutiesFiles[community.value]);
   }
