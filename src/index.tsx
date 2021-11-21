@@ -1,11 +1,11 @@
-import { createMuiTheme, CssBaseline, ThemeProvider } from '@material-ui/core';
+import { createTheme, CssBaseline, ThemeProvider } from '@material-ui/core';
 import ReactDOM from 'react-dom';
 import App from './App';
 
 /**
  * Customize form so each control has more space
  */
-const theme = createMuiTheme({
+const theme = createTheme({
   overrides: {
     MuiFormControl: {
       root: {

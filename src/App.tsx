@@ -4,23 +4,21 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import logo from './logo.svg';
-import './App.css';
+import './css/App.css';
 import schema from './schema.json';
 import uischema from './uischema.json';
 import {
   materialCells,
   materialRenderers,
 } from '@jsonforms/material-renderers';
-import RatingControl from './RatingControl';
-import ratingControlTester from './ratingControlTester';
 
 import LocationControl from './LocationControl';
 import locationControlTester from './locationControlTester';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Text } from 'react-native';
 import * as React from 'react';
 import Select from 'react-select';
+import { Text } from 'react-native';
 import slugify from 'react-slugify';
 
 const useStyles = makeStyles((_theme) => ({
@@ -78,7 +76,6 @@ let initialErrors: Array<{message: string, dataPath: string}> = [];
 const renderers = [
   ...materialRenderers,
   //register custom renderers
-  { tester: ratingControlTester, renderer: RatingControl },
   { tester: locationControlTester, renderer: LocationControl },
 ];
 
