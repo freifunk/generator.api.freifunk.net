@@ -5,7 +5,6 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import logo from './logo.svg';
 import './css/App.css';
-import schema from './schema.json';
 import uischema from './uischema.json';
 import {
   materialCells,
@@ -70,7 +69,7 @@ const useStyles = makeStyles((_theme) => ({
 //initial Data of the jsonform
 const initialData = {};
 //initla errors
-let initialErrors: Array<{message: string, dataPath: string}> = [];
+let initialErrors: Array<{ message: string, dataPath: string }> = [];
 
 //    Renderer set
 const renderers = [
@@ -79,9 +78,31 @@ const renderers = [
   { tester: locationControlTester, renderer: LocationControl },
 ];
 
-const apiVersion = "0.5.0";
 //    Forms App
 const App = () => {
+  const [apiVersion, setApiVersion] = useState("");
+
+  //fetching current api schema
+  const [schema, setSchema] = useState({});
+  const fetchSchema = () => {
+    fetch("https://raw.githubusercontent.com/freifunk/api.freifunk.net/master/specs/current")
+      .then(response => response.text())
+      .then(data => {
+        fetch("https://raw.githubusercontent.com/freifunk/api.freifunk.net/master/specs/" + data)
+          .then(response => response.json())
+          .then(data => {
+            setSchema(data);
+            setApiVersion(data.properties.api.default);
+          })
+          .catch(() => {
+            console.log("NetworkError: Can't fetch the api schema file")
+          })
+      })
+  }
+  useEffect(() => {
+    fetchSchema();
+  }, [])
+
 
   const classes = useStyles();  //for user defined css styles
 
@@ -92,7 +113,7 @@ const App = () => {
   useEffect(() => {
     jsonformsData.api = apiVersion;
     setDisplayDataAsString(JSON.stringify(jsonformsData, null, 2));
-  }, [jsonformsData]);
+  }, [jsonformsData, apiVersion]);
 
 
   //   FormsData functions
@@ -120,7 +141,7 @@ const App = () => {
       let fileData = jsonformsData;
       fileData.api = apiVersion;
       const json = JSON.stringify(jsonformsData);
-      const blob = new Blob([json],{type:'application/json'});
+      const blob = new Blob([json], { type: 'application/json' });
       const href = await URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = href;
@@ -130,43 +151,42 @@ const App = () => {
       document.body.removeChild(link);
       return console.log("generated");
     }
-    if(errorToFocus.current) errorToFocus.current.scrollIntoView({ behavior: "smooth", block: "nearest" })
+    if (errorToFocus.current) errorToFocus.current.scrollIntoView({ behavior: "smooth", block: "nearest" })
     console.log("Can't generate");
   }
 
   //fetching all the API files
-  const [comminutiesFiles, setCommunitiesFiles ] = useState([]);
+  const [comminutiesFiles, setCommunitiesFiles] = useState([]);
   const fetchCommunities = () => {
     fetch("https://raw.githubusercontent.com/freifunk/directory.api.freifunk.net/master/directory.json")
       .then(response => response.json())
       .then(data => setCommunitiesFiles(data))
-      .catch(()=> console.log("NetworkError: Can't fetch the api file"))
+      .catch(() => console.log("NetworkError: Can't fetch the api file"))
   }
-  useEffect( () => {
+  useEffect(() => {
     fetchCommunities();
-  },[])
-  
+  }, [])
+
   //list of communities to select
-  const communities: Array<{value: string, label: string}> = []
-  Object.keys(comminutiesFiles).sort().forEach((comm)=> {
-    communities.push({ value: comm, label: comm})
+  const communities: Array<{ value: string, label: string }> = []
+  Object.keys(comminutiesFiles).sort().forEach((comm) => {
+    communities.push({ value: comm, label: comm })
   })
 
   //to update the location
   const correctLocation = (data: any) => {
     //deleting the api version
-    delete data.api;
     if (!data.location)
       return data;
 
-    if (!data.location.geoCode){
+    if (!data.location.geoCode) {
       data.location.geoCode = { lat: data.location.lat, lon: data.location.lon }
       delete data.location.lon;
       delete data.location.lat;
       //check all the additional location
       if (!data.location.additionalLocations)
         return data;
-      
+
       data.location.additionalLocations.forEach((add: any) => {
         if (add.geoCode)
           return
@@ -182,21 +202,21 @@ const App = () => {
 
   const correctCaseSensitivity = (data: any) => {
 
-    if(!data.location.address)
+    if (!data.location.address)
       return data
 
-    if(data.location.address.Name){
+    if (data.location.address.Name) {
       data.location.address.name = data.location.address.Name;
       delete data.location.address.Name;
     }
 
-    if(data.location.address.Street){
+    if (data.location.address.Street) {
       data.location.address.street = data.location.address.Street;
       delete data.location.address.Street;
     }
 
 
-    if(data.location.address.Zipcode){
+    if (data.location.address.Zipcode) {
       data.location.address.zipcode = data.location.address.Zipcode;
       delete data.location.address.Zipcode;
     }
@@ -207,15 +227,15 @@ const App = () => {
   //to load the data into the form
   let loadData = (community: any) => {
     // console.log(community.value)
-    fetch("https://freifunk.net/api/generator/php-simple-proxy/ba-simple-proxy.php?url="+comminutiesFiles[community.value])
+    fetch("https://freifunk.net/api/generator/php-simple-proxy/ba-simple-proxy.php?url=" + comminutiesFiles[community.value])
       .then(response => response.json())
       .then(data => {
         data = correctLocation(data.contents);
         data = correctCaseSensitivity(data);
         setJsonformsData(data);
       })
-      // .catch(()=> console.log("NetworkError: Can't fetch the api file"))
-      // .then(con => console.log(con))
+    // .catch(()=> console.log("NetworkError: Can't fetch the api file"))
+    // .then(con => console.log(con))
     // setJsonformsData(comminutiesFiles[community.value]);
   }
 
@@ -273,7 +293,7 @@ const App = () => {
             </Typography>
 
             <div className={classes.dataValidation}>
-              <Text>{validationErrors.map(d => <li key= {d.dataPath}>{d.dataPath}:{d.message}</li>)}</Text>
+              <Text>{validationErrors.map(d => <li key={d.dataPath}>{d.dataPath}:{d.message}</li>)}</Text>
             </div>
           </div>
 
@@ -298,10 +318,10 @@ const App = () => {
               cells={materialCells}
               validationMode={"ValidateAndShow"}
               onChange={({ errors, data }) => {
-                  setJsonformsData(data);
-                  recordErrors(errors);
-                  if (Object.keys(jsonformsData).length === 0) recordErrors([]);
-                }
+                setJsonformsData(data);
+                recordErrors(errors);
+                if (Object.keys(jsonformsData).length === 0) recordErrors([]);
+              }
               }
             />
           </div>
