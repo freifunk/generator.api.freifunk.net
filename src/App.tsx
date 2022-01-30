@@ -175,7 +175,6 @@ const App = () => {
 
   //to update the location
   const correctLocation = (data: any) => {
-    //deleting the api version
     if (!data.location)
       return data;
 
@@ -234,9 +233,6 @@ const App = () => {
         data = correctCaseSensitivity(data);
         setJsonformsData(data);
       })
-    // .catch(()=> console.log("NetworkError: Can't fetch the api file"))
-    // .then(con => console.log(con))
-    // setJsonformsData(comminutiesFiles[community.value]);
   }
 
   return (
