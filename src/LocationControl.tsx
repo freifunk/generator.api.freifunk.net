@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { withJsonFormsControlProps } from "@jsonforms/react";
 import { MapContainer, TileLayer } from 'react-leaflet';
 import { Location }  from './Location';

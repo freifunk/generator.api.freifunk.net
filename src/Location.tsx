@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { Marker } from 'react-leaflet';
 import { useState, useRef, useMemo } from 'react';
 

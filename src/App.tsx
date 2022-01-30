@@ -14,10 +14,10 @@ import LocationControl from './LocationControl';
 import locationControlTester from './locationControlTester';
 
 import { makeStyles } from '@material-ui/core/styles';
-import * as React from 'react';
 import Select from 'react-select';
 import { Text } from 'react-native';
 import slugify from 'react-slugify';
+import React from 'react';
 
 const useStyles = makeStyles((_theme) => ({
   container: {
