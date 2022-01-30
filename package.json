@@ -12,8 +12,10 @@
     "@types/node": "^17.0.13",
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
+    "buffer": "^6.0.3",
     "gh-pages": "^3.2.3",
     "globby": "^13.1.0",
+    "https-browserify": "^1.0.0",
     "leaflet": "^1.7.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -25,17 +27,20 @@
     "typescript": "^4.5.5"
   },
   "devDependencies": {
+    "@types/jest": "^27.4.0",
     "@types/leaflet": "^1.7.9",
     "@types/react-native": "^0.66.15",
     "cypress": "^9.3.1",
+    "process": "^0.11.10",
+    "react-app-rewired": "^2.1.11",
     "react-scripts": "^5.0.0",
-    "start-server-and-test": "^1.14.0"
-    },
+    "start-server-and-test": "^1.14.0",
+    "stream-http": "^3.2.0"
+  },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "eject": "react-scripts eject",
-    "test": "react-scripts test --env=jsdom",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test --env=jsdom",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run --config video=false",
     "cypress:ci": "BROWSER=none start-server-and-test start http://localhost:3000 cypress:run",
@@ -49,16 +54,15 @@
     ]
   },
   "browserslist": {
-  "production": [
-    ">0.2%",
-    "not dead",
-    "not op_mini all"
-  ],
-  "development": [
-    "last 1 chrome version",
-    "last 1 firefox version",
-    "last 1 safari version"
-  ]
-}
-
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }
