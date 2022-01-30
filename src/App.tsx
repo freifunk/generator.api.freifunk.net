@@ -238,11 +238,6 @@ const App = () => {
   return (
     <Fragment>
       <div className='App'>
-        <header className='App-header'>
-          <img src={logo} className='App-logo' alt='logo' />
-          <h1 className='App-title'>API Generator</h1>
-          <p className='App-intro'>More Forms. Less Code.</p>
-        </header>
       </div>
 
       <Grid
