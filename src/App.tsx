@@ -139,7 +139,7 @@ const App = () => {
       const fileName = slugify(jsonformsData.name);
       let fileData = jsonformsData;
       fileData.api = apiVersion;
-      const json = JSON.stringify(jsonformsData);
+      const json = JSON.stringify(jsonformsData, null, 2);
       const blob = new Blob([json], { type: 'application/json' });
       const href = await URL.createObjectURL(blob);
       const link = document.createElement('a');
