@@ -24,7 +24,7 @@ const LocationControl: React.FC<LocationControlProps> = ({ data, handleChange, p
   }
 
   return(
-  	<MapContainer center={mapCenter} zoom={7} scrollWheelZoom={false} style={{ height: '50vh', width: '100wh' }}>
+  	<MapContainer center={mapCenter} zoom={7} scrollWheelZoom={false} style={{ height: '20rem', width: '100wh' }}>
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
