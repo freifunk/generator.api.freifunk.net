@@ -16,8 +16,8 @@ interface LocationProps {
 }
 
 let center = {
-  lat: 51,
-  lng: 8
+  lat: 51.1657,
+  lng: 10.4515
 }
 
 export const Location: React.FC<LocationProps> = ({ id, value, updateCords }) => {
