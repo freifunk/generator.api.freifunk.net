@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/generator.api.freifunk.net/static/css/main.2789761e.css",
+    "main.js": "/generator.api.freifunk.net/static/js/main.9c1ba2af.js",
+    "static/media/materialicons.woff2": "/generator.api.freifunk.net/static/media/materialicons.90170fbdd3dad451d44d.woff2",
+    "index.html": "/generator.api.freifunk.net/index.html",
+    "main.2789761e.css.map": "/generator.api.freifunk.net/static/css/main.2789761e.css.map",
+    "main.9c1ba2af.js.map": "/generator.api.freifunk.net/static/js/main.9c1ba2af.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2789761e.css",
+    "static/js/main.9c1ba2af.js"
+  ]
+}
