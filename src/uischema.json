@@ -110,7 +110,7 @@
             },
             {
               "type": "Control",
-              "scope": "#/properties/contact/properties/googleplus"
+              "scope": "#/properties/contact/properties/mastodon"
             }
           ]
         },
