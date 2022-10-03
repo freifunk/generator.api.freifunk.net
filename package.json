@@ -29,7 +29,7 @@
     "webpack": "^5.0.0"
   },
   "devDependencies": {
-    "@types/jest": "^28.1.7",
+    "@types/jest": "^29.1.1",
     "@types/leaflet": "^1.7.9",
     "@types/react-native": "^0.66.15",
     "cypress": "^10.6.0",
