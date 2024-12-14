@@ -8,7 +8,7 @@
     "@jsonforms/material-renderers": "2.5.2",
     "@jsonforms/react": "2.5.2",
     "@mui/material": "5.0.0",
-    "@material-ui/icons": "4.11.3",
+    "@mui/icons-material": "5.0.0",
     "@types/node": "18.19.68",
     "@types/react": "17.0.52",
     "@types/react-dom": "17.0.17",
