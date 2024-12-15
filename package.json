@@ -12,7 +12,7 @@
     "@types/node": "18.19.68",
     "@types/react": "17.0.83",
     "@types/react-dom": "17.0.26",
-    "autoprefixer": "10.4.15",
+    "autoprefixer": "10.4.20",
     "buffer": "6.0.3",
     "globby": "13.1.2",
     "https-browserify": "1.0.0",
