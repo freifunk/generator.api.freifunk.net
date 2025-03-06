@@ -20,6 +20,7 @@ jobs:
       - run: npm i
       - run: npm ci
       - run: CI= PUBLIC_URL=${{ secrets.PUBLIC_URL }} npm run build
+      - run: npm run test:ci
       
       - name: Publish
         if: github.event_name == 'push'

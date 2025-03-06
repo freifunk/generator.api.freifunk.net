@@ -43,6 +43,7 @@
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
+    "test:ci": "react-app-rewired test --env=jsdom --watchAll=false",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run --config video=false",
     "cypress:ci": "BROWSER=none start-server-and-test start http://localhost:3000 cypress:run",
