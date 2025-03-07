@@ -1,8 +1,6 @@
 import { Fragment, useState, useEffect } from 'react';
 import { JsonForms } from '@jsonforms/react';
-import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+import { Grid, Button, Typography } from '@mui/material';
 import './css/App.css';
 import uischema from './uischema.json';
 import {
@@ -13,56 +11,59 @@ import {
 import LocationControl from './LocationControl';
 import locationControlTester from './locationControlTester';
 
-import { makeStyles } from '@material-ui/core/styles';
+import { styled } from '@mui/material/styles';
 import Select from 'react-select';
 import { Text } from 'react-native';
 import slugify from 'react-slugify';
 import React from 'react';
 
-const useStyles = makeStyles((_theme) => ({
-  container: {
-    padding: '1em',
-    width: '100%',
-  },
-  title: {
-    textAlign: 'center',
-    padding: '0.25em',
-  },
-  dataContent: {
-    display: 'flex',
-    justifyContent: 'center',
-    borderRadius: '0.25em',
-    backgroundColor: '#cecece',
-    marginBottom: '1rem',
-    padding: '1rem',
-    width: '100%',
-    minHeight: '20em',
-  },
-  dataValidation: {
-    display: 'flex',
-    justifyContent: 'center',
-    borderRadius: '0.25em',
-    backgroundColor: '#cecece',
-    marginBottom: '1rem',
-    padding: '1rem',
-  },
-  buttonLayout: {
-    display: 'flex',
-    justifyContent: 'center',
-    borderRadius: '0.25em',
-    marginBottom: '1rem',
-    padding: "1rem"
-  },
-  button: {
-    margin: 'auto',
-    display: 'block',
-  },
-  form: {
-    margin: 'auto',
-    padding: '1rem',
-  },
+const Container = styled(Grid)(({ theme }) => ({
+  padding: '1em',
+  width: '100%',
 }));
 
+const StyledTitle = styled(Typography)(({ theme }) => ({
+  textAlign: 'center',
+  padding: '0.25em',
+}));
+
+const DataContent = styled('div')(({ theme }) => ({
+  display: 'flex',
+  justifyContent: 'center',
+  borderRadius: '0.25em',
+  backgroundColor: '#cecece',
+  marginBottom: '1rem',
+  padding: '1rem',
+  width: '100%',
+  minHeight: '20em',
+}));
+
+const DataValidation = styled('div')(({ theme }) => ({
+  display: 'flex',
+  justifyContent: 'center',
+  borderRadius: '0.25em',
+  backgroundColor: '#cecece',
+  marginBottom: '1rem',
+  padding: '1rem',
+}));
+
+const ButtonLayout = styled('div')(({ theme }) => ({
+  display: 'flex',
+  justifyContent: 'center',
+  borderRadius: '0.25em',
+  marginBottom: '1rem',
+  padding: '1rem',
+}));
+
+const StyledButton = styled(Button)(({ theme }) => ({
+  margin: 'auto',
+  display: 'block',
+}));
+
+const Form = styled('div')(({ theme }) => ({
+  margin: 'auto',
+  padding: '1rem',
+}));
 
 //    Req. Parameters
 //initial Data of the jsonform
@@ -90,6 +91,8 @@ const App = () => {
         fetch("https://raw.githubusercontent.com/freifunk/api.freifunk.net/master/specs/" + data)
           .then(response => response.json())
           .then(data => {
+            // Fix any problematic regex patterns
+            fixSchemaRegex(data);
             setSchema(data);
             setApiVersion(data.properties.api.default);
           })
@@ -102,8 +105,31 @@ const App = () => {
     fetchSchema();
   }, [])
 
+  // Helper function to fix regex patterns
+  const fixSchemaRegex = (schema: any) => {
+    // Recursively find and fix all regex patterns
+    const processObject = (obj: any) => {
+      if (!obj || typeof obj !== 'object') return;
+      
+      if (obj.pattern && typeof obj.pattern === 'string') {
+        // Replace problematic pattern
+        if (obj.pattern.includes('\\.\\_\\-') || obj.pattern.includes('\\.\\-\\_')) {
+          obj.pattern = obj.pattern.replace('\\.\\_\\-', '\\._-').replace('\\.\\-\\_', '\\._-');
+        }
+      }
+      
+      // Process all properties and array items
+      Object.values(obj).forEach(value => {
+        if (typeof value === 'object' && value !== null) {
+          processObject(value);
+        }
+      });
+    };
+    
+    processObject(schema);
+  };
 
-  const classes = useStyles();  //for user defined css styles
+  // const classes = useStyles();  //for user defined css styles
 
   //    Form data hooks
   const [displayDataAsString, setDisplayDataAsString] = useState('');
@@ -236,88 +262,92 @@ const App = () => {
 
   return (
     <Fragment>
-      <div className='App'>
-      </div>
+    <div className='App'>
+    </div>
 
-      <Grid
-        container
-        justify={'center'}
-        spacing={1}
-        className={classes.container}
-      >
-        <Grid item sm={5}>
+    <Container container justifyContent="center" spacing={1}>
+      <Grid item sm={5}>
+        <StyledTitle variant="h3">
+          Load Data
+        </StyledTitle>
 
-          <Typography variant={'h3'} className={classes.title}>
-            Load Data
-          </Typography>
-
-          <div className={classes.container}>
-            <Select
-              options={communities}
-              onChange={community => loadData(community)}
-            />
-          </div>
-
-          <Typography variant={'h3'} className={classes.title}>
-            Your API file
-          </Typography>
-
-          <textarea disabled id='boundData' className={classes.dataContent}
-            value={displayDataAsString}
+        <Container>
+          <Select
+            options={communities}
+            onChange={community => loadData(community)}
           />
+        </Container>
 
-          <div className={classes.buttonLayout}>
-            <Button
-              className={classes.button}
-              onClick={clearData}
-              color='primary'
-              variant='contained'
-            >
-              Clear data
-            </Button>
-          </div>
+        <StyledTitle variant="h3">
+          Your API file
+        </StyledTitle>
+        <DataContent>
+          <textarea 
+            disabled 
+            id='boundData'
+            value={displayDataAsString}
+            style={{
+              width: '100%',
+              height: '100%',
+              minHeight: '20em',
+              resize: 'none',
+              border: 'none',
+              backgroundColor: 'transparent',
+              fontFamily: 'monospace'
+            }}
+          />
+        </DataContent>
 
-          <div ref={errorToFocus}>
-            <Typography variant={'h3'} className={classes.title}>
-              Validation
-            </Typography>
+        <ButtonLayout>
+          <StyledButton
+            onClick={clearData}
+            color='primary'
+            variant='contained'
+          >
+            Clear data
+          </StyledButton>
+        </ButtonLayout>
 
-            <div className={classes.dataValidation}>
-              <Text>{validationErrors.map(d => <li key={d.dataPath}>{d.dataPath}:{d.message}</li>)}</Text>
-            </div>
-          </div>
+        <div ref={errorToFocus}>
+          <StyledTitle variant="h3">
+            Validation
+          </StyledTitle>
 
-        </Grid>
-
-        <Grid item sm={7}>
-          <Typography variant={'h3'} className={classes.title}>
-            Generator form
-          </Typography>
-          <div className={classes.form}>
-            <Button
-              className={classes.button}
-              onClick={generateFile}
-              color='primary'
-              variant='contained'
-            >Generate API FILE</Button>
-            <JsonForms
-              schema={schema}
-              uischema={uischema}
-              data={jsonformsData}
-              renderers={renderers}
-              cells={materialCells}
-              validationMode={"ValidateAndShow"}
-              onChange={({ errors, data }) => {
-                setJsonformsData(data);
-                recordErrors(errors);
-                if (Object.keys(jsonformsData).length === 0) recordErrors([]);
-              }
-              }
-            />
-          </div>
-        </Grid>
+          <DataValidation>
+            <Text>{validationErrors.map(d => <li key={d.dataPath}>{d.dataPath}:{d.message}</li>)}</Text>
+          </DataValidation>
+        </div>
       </Grid>
-    </Fragment>
+
+      <Grid item sm={7}>
+        <StyledTitle variant="h3">
+          Generator form
+        </StyledTitle>
+        <Form>
+          <StyledButton
+            onClick={generateFile}
+            color='primary'
+            variant='contained'
+          >
+            Generate API FILE
+          </StyledButton>
+          <JsonForms
+            schema={schema}
+            uischema={uischema}
+            data={jsonformsData}
+            renderers={renderers}
+            cells={materialCells}
+            validationMode={"ValidateAndShow"}
+            onChange={({ errors, data }) => {
+              setJsonformsData(data);
+              recordErrors(errors);
+              if (Object.keys(jsonformsData).length === 0) recordErrors([]);
+            }}
+          />
+        </Form>
+      </Grid>
+    </Container>
+  </Fragment>
   );
 };
 
