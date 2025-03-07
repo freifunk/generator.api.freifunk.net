@@ -29,7 +29,7 @@
   "devDependencies": {
     "@types/jest": "29.5.13",
     "@types/leaflet": "1.9.16",
-    "cypress": "10.11.0",
+    "cypress": "14.1.0",
     "process": "0.11.10",
     "react-app-rewired": "2.2.1",
     "react-scripts": "5.0.1",
