@@ -15,11 +15,11 @@ jest.mock('./Location', () => ({
 }));
 
 // Mock problematic es module dependencies
-jest.mock('react-slugify', () => (str) => str.toLowerCase().replace(/\s+/g, '-'));
+jest.mock('react-slugify', () => (str: string) => str.toLowerCase().replace(/\s+/g, '-'));
 
 // Mock any other ES module dependencies if needed
 jest.mock('diacritics', () => ({
-  remove: (str) => str
+  remove: (str: string) => str
 }));
 
 it('renders without crashing', () => {
