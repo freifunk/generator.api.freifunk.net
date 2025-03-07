@@ -13,7 +13,6 @@ import locationControlTester from './locationControlTester';
 
 import { styled } from '@mui/material/styles';
 import Select from 'react-select';
-import { Text } from 'react-native';
 import slugify from 'react-slugify';
 import React from 'react';
 
@@ -314,7 +313,13 @@ const App = () => {
           </StyledTitle>
 
           <DataValidation>
-            <Text>{validationErrors.map(d => <li key={d.dataPath}>{d.dataPath}:{d.message}</li>)}</Text>
+            <div>
+              <ul>
+                {validationErrors.map(d => (
+                  <li key={d.dataPath}>{d.dataPath}:{d.message}</li>
+                ))}
+              </ul>
+            </div>
           </DataValidation>
         </div>
       </Grid>

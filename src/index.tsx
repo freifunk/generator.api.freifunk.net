@@ -1,5 +1,5 @@
 import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import App from './App';
 
 /**
@@ -17,10 +17,13 @@ const theme = createTheme({
   },
 });
 
-ReactDOM.render(
+const rootElement = document.getElementById('root');
+if (!rootElement) throw new Error('Failed to find the root element');
+const root = createRoot(rootElement);
+
+root.render(
   <ThemeProvider theme={theme}>
     <CssBaseline />
     <App />
-  </ThemeProvider>,
-  document.getElementById('root')
+  </ThemeProvider>
 );
