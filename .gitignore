@@ -60,6 +60,7 @@ typings/
 .idea
 
 build
+dist
 .yalc
 yalc.lock
 
