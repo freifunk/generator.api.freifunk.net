@@ -22,33 +22,35 @@
     "react-leaflet": "5.0.0",
     "react-select": "5.10.1",
     "react-slugify": "4.0.1",
-    "typescript": "4.9.5",
+    "typescript": "5.5.4",
     "url": "0.11.4",
     "webpack": "5.98.0"
   },
   "devDependencies": {
     "@testing-library/cypress": "^10.0.3",
+    "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
     "@types/cypress": "^1.0.0",
     "@types/jest": "29.5.14",
     "@types/leaflet": "1.9.16",
+    "@vitejs/plugin-react": "^4.3.4",
     "cypress": "14.1.0",
+    "jsdom": "^26.0.0",
     "process": "0.11.10",
-    "react-app-rewired": "2.2.1",
-    "react-scripts": "5.0.1",
     "start-server-and-test": "2.0.10",
-    "stream-http": "3.2.0"
+    "stream-http": "3.2.0",
+    "vite": "^6.2.1",
+    "vitest": "^3.0.8"
   },
   "scripts": {
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
-    "test": "react-app-rewired test --env=jsdom",
-    "test:ci": "react-app-rewired test --env=jsdom --watchAll=false",
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run --config video=false",
-    "cypress:ci": "BROWSER=none start-server-and-test start http://localhost:3000 cypress:run",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "cypress:ci": "BROWSER=none start-server-and-test start http://localhost:3000 cypress:run"
   },
   "eslintConfig": {
     "extends": [

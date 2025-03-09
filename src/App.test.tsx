@@ -1,30 +1,34 @@
-import React from 'react';
-import { createRoot } from 'react-dom/client';
+import { render } from '@testing-library/react';
 import App from './App';
+import { describe, it, vi } from 'vitest';
 
 // Mock modules that use ES exports
-jest.mock('react-leaflet', () => ({
+vi.mock('react-leaflet', () => ({
   MapContainer: () => <div data-testid="map-container" />,
   TileLayer: () => <div data-testid="tile-layer" />,
   Marker: () => <div data-testid="marker" />,
-  useMap: () => ({ fitBounds: jest.fn() })
+  useMap: () => ({ fitBounds: vi.fn(), setView: vi.fn() })
 }));
 
-jest.mock('./Location', () => ({
+vi.mock('./Location', () => ({
   Location: () => <div data-testid="location" />
 }));
 
-// Mock problematic es module dependencies
-jest.mock('react-slugify', () => (str: string) => str.toLowerCase().replace(/\s+/g, '-'));
+// Fix: Mock react-slugify with proper default export
+vi.mock('react-slugify', () => {
+  return {
+    default: (str: string) => str.toLowerCase().replace(/\s+/g, '-')
+  };
+});
 
 // Mock any other ES module dependencies if needed
-jest.mock('diacritics', () => ({
+vi.mock('diacritics', () => ({
   remove: (str: string) => str
 }));
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-    const root = createRoot(div);
-    root.render(<App />);
-    root.unmount();
+describe('App', () => {
+  it('renders without crashing', () => {
+    render(<App />);
+    // Add assertions as needed
+  });
 });
