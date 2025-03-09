@@ -314,9 +314,9 @@ const App = () => {
 
           <DataValidation>
             <div>
-              <ul>
-                {validationErrors.map(d => (
-                  <li key={d.dataPath}>{d.dataPath}:{d.message}</li>
+              <ul id="errors">
+                {validationErrors.map((d, index) => (
+                  <li key={`${d.dataPath}-${index}`}>{d.dataPath}:{d.message}</li>
                 ))}
               </ul>
             </div>
@@ -346,7 +346,7 @@ const App = () => {
             onChange={({ errors, data }) => {
               setJsonformsData(data);
               recordErrors(errors);
-              if (Object.keys(jsonformsData).length === 0) recordErrors([]);
+              if (Object.keys(data).length === 0) recordErrors([]);
             }}
           />
         </Form>
