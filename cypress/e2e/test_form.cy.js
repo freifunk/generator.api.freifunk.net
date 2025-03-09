@@ -52,6 +52,7 @@ context('Form', () => {
   });
 
   it('should set map coordinates', () => {
+    cy.wait(1000)
     cy.get('.leaflet-marker-icon').trigger('mousedown', { which: 1 })
     .trigger('mousemove', 2, 2)
     .trigger('mouseup', { force: true })
