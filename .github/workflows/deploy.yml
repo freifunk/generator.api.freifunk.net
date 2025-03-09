@@ -20,7 +20,7 @@ jobs:
       - run: npm i
       - run: npm ci
       - name: Build for production
-        run: CI= PUBLIC_URL=${{ secrets.PUBLIC_URL }} npm run build
+        run: CI= VITE_PUBLIC_URL=${{ secrets.VITE_PUBLIC_URL }} npm run build
       - name: Run tests
         run: npm run test
       - name: Run frontend tests

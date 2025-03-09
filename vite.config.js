@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react';
 import path from 'path';
 
 export default defineConfig({
-  base: '/generator.api.freifunk.net/',
+  base: '/api/generator/',
   plugins: [react()],
   resolve: {
     alias: {
