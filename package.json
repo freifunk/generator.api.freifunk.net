@@ -11,7 +11,7 @@
     "@mui/material": "6.4.10",
     "@types/node": "22.14.0",
     "@types/react": "19.0.",
-    "@types/react-dom": "19.1.1",
+    "@types/react-dom": "19.1.2",
     "autoprefixer": "10.4.21",
     "buffer": "6.0.3",
     "globby": "14.1.0",
