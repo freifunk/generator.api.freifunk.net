@@ -34,7 +34,7 @@
     "@types/jest": "29.5.14",
     "@types/leaflet": "1.9.18",
     "@vitejs/plugin-react": "^4.3.4",
-    "cypress": "14.3.3",
+    "cypress": "14.4.0",
     "jsdom": "^26.0.0",
     "process": "0.11.10",
     "start-server-and-test": "2.0.12",
