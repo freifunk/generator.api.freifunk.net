@@ -27,7 +27,7 @@
             },
             {
               "type": "Control",
-              "scope": "#/properties/location/properties/zipcode"
+              "scope": "#/properties/location/properties/address/properties/zipcode"
             }         
           ]
         },
