@@ -5,7 +5,7 @@
   "homepage": "https://freifunk.github.io/generator.api.freifunk.net",
   "dependencies": {
     "@jsonforms/core": "3.5.1",
-    "@jsonforms/material-renderers": "3.5.1",
+    "@jsonforms/material-renderers": "3.6.0",
     "@jsonforms/react": "3.5.1",
     "@mui/icons-material": "6.5.0",
     "@mui/material": "6.5.0",
