@@ -27,7 +27,20 @@
             },
             {
               "type": "Control",
+              "scope": "#/properties/location/properties/zipcode"
+            }         
+          ]
+        },
+        {
+          "type": "HorizontalLayout",
+          "elements": [
+            {
+              "type": "Control",
               "scope": "#/properties/location/properties/country"
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/location/properties/state"
             }         
           ]
         },
@@ -41,10 +54,6 @@
             {
               "type": "Control",
               "scope": "#/properties/location/properties/address/properties/street"
-            },
-            {
-              "type": "Control",
-              "scope": "#/properties/location/properties/address/properties/zipcode"
             }
           ]
         },
