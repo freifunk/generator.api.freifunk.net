@@ -24,7 +24,7 @@
     "react-slugify": "4.0.1",
     "typescript": "5.9.2",
     "url": "0.11.4",
-    "webpack": "5.101.3"
+    "webpack": "5.102.0"
   },
   "devDependencies": {
     "@testing-library/cypress": "^10.0.3",
