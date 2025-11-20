@@ -9,7 +9,7 @@
     "@jsonforms/react": "3.6.0",
     "@mui/icons-material": "6.5.0",
     "@mui/material": "6.5.0",
-    "@types/node": "22.18.12",
+    "@types/node": "22.19.1",
     "@types/react": "19.0.",
     "@types/react-dom": "19.2.3",
     "autoprefixer": "10.4.22",
