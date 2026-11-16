@@ -84,10 +84,15 @@ const App = () => {
   //fetching current api schema
   const [schema, setSchema] = useState({});
   const fetchSchema = () => {
-    fetch("https://raw.githubusercontent.com/freifunk/api.freifunk.net/master/specs/current")
-      .then(response => response.text())
-      .then(data => {
-        fetch("https://raw.githubusercontent.com/freifunk/api.freifunk.net/master/specs/" + data)
+    // VITE_SCHEMA_URL allows testing an unreleased spec, e.g. specs/development.json
+    const schemaUrl: Promise<string> = import.meta.env.VITE_SCHEMA_URL
+      ? Promise.resolve(import.meta.env.VITE_SCHEMA_URL)
+      : fetch("https://raw.githubusercontent.com/freifunk/api.freifunk.net/master/specs/current")
+          .then(response => response.text())
+          .then(data => "https://raw.githubusercontent.com/freifunk/api.freifunk.net/master/specs/" + data);
+    schemaUrl
+      .then(url => {
+        fetch(url)
           .then(response => response.json())
           .then(data => {
             // Fix any problematic regex patterns

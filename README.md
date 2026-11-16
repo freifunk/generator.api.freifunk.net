@@ -6,6 +6,12 @@
 
 Browse to http://localhost:3000 to see the application in action.
 
+By default the generator loads the current released API spec from GitHub. To test an unreleased spec, set `VITE_SCHEMA_URL`, e.g.:
+
+```
+VITE_SCHEMA_URL=https://raw.githubusercontent.com/freifunk/api.freifunk.net/master/specs/development.json npm start
+```
+
 ## File Structure
 
 Let's briefly have a look at the most important files:

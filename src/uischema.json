@@ -156,6 +156,7 @@
     },
     {
       "type": "Control",
+      "label": "Timeline",
       "scope": "#/properties/timeline"
     },
     {
