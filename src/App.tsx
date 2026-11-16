@@ -84,10 +84,15 @@ const App = () => {
   //fetching current api schema
   const [schema, setSchema] = useState({});
   const fetchSchema = () => {
-    fetch("https://raw.githubusercontent.com/freifunk/api.freifunk.net/master/specs/current")
-      .then(response => response.text())
-      .then(data => {
-        fetch("https://raw.githubusercontent.com/freifunk/api.freifunk.net/master/specs/" + data)
+    // VITE_SCHEMA_URL allows testing an unreleased spec, e.g. specs/development.json
+    const schemaUrl: Promise<string> = import.meta.env.VITE_SCHEMA_URL
+      ? Promise.resolve(import.meta.env.VITE_SCHEMA_URL)
+      : fetch("https://raw.githubusercontent.com/freifunk/api.freifunk.net/master/specs/current")
+          .then(response => response.text())
+          .then(data => "https://raw.githubusercontent.com/freifunk/api.freifunk.net/master/specs/" + data);
+    schemaUrl
+      .then(url => {
+        fetch(url)
           .then(response => response.json())
           .then(data => {
             // Fix any problematic regex patterns
@@ -265,7 +270,7 @@ const App = () => {
     </div>
 
     <Container container justifyContent="center" spacing={1}>
-      <Grid item sm={5}>
+      <Grid size={{ xs: 12, sm: 5 }}>
         <StyledTitle variant="h3">
           Load Data
         </StyledTitle>
@@ -324,7 +329,7 @@ const App = () => {
         </div>
       </Grid>
 
-      <Grid item sm={7}>
+      <Grid size={{ xs: 12, sm: 7 }}>
         <StyledTitle variant="h3">
           Generator form
         </StyledTitle>
