@@ -16,7 +16,9 @@ context('Form', () => {
     cy.get('[id="#/properties/url-input"]').clear().type(urlText);
     cy.get('[id="#/properties/location/properties/city-input"]').clear().type(cityText);
     cy.get('[id="#/properties/contact/properties/email-input"]').clear().type(emailText);
-    cy.get('[id="#/properties/lastchange-input"]').clear().type(dateText);
+    // @mui/x-date-pickers v8 renders the date as sections (year, month, ...) instead of a plain input
+    cy.get('[role="group"][aria-labelledby="#/properties/lastchange-input-label"]')
+      .find('[role="spinbutton"]').first().click().type(dateText.replace(/\D/g, ''));
     cy.get('[id="#/properties/url3-input"]').clear().type(urlText);
 
     cy.get('.leaflet-marker-icon').trigger('mousedown', { which: 1 })

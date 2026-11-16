@@ -265,7 +265,7 @@ const App = () => {
     </div>
 
     <Container container justifyContent="center" spacing={1}>
-      <Grid item sm={5}>
+      <Grid size={{ xs: 12, sm: 5 }}>
         <StyledTitle variant="h3">
           Load Data
         </StyledTitle>
@@ -324,7 +324,7 @@ const App = () => {
         </div>
       </Grid>
 
-      <Grid item sm={7}>
+      <Grid size={{ xs: 12, sm: 7 }}>
         <StyledTitle variant="h3">
           Generator form
         </StyledTitle>
